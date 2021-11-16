@@ -13,6 +13,7 @@ LOGFILE="$LOGFOLDER/${DATE}_SYSC3010install.log"
 
 echo $LOGFILE
 
+[ ! -d ${SCRIPTFOLDER} ] && mkdir ${SCRIPTFOLDER}
 #delete older logs
 #rm -rf $LOGFOLDER/*
 
