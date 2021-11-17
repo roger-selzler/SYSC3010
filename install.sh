@@ -14,8 +14,6 @@ LOGFILE="$LOGFOLDER/${DATE}_SYSC3010install.log"
 echo $LOGFILE
 
 [ ! -d ${SCRIPTFOLDER} ] && mkdir ${SCRIPTFOLDER}
-#delete older logs
-#rm -rf $LOGFOLDER/*
 
 exec &> >(tee $LOGFILE)
 
@@ -31,30 +29,7 @@ apt-get -y autoremove
 
 apt-get -y install $PYTHONVERSION python3-pip
 
-
-#[ -f ~/.bash_aliases ] || touch ~/.bash_aliases
-#if grep -q "alias python" ~/.bash_aliases
-#then
-#  echo -e "python alias already exist"
-#  if ! grep -Fxq "alias python=${PYTHONVERSION}" ~/.bash_aliases
-#  then
-#    echo -e "\e[33mPython alias using different version than course. Changing it to ${PYTHONVERSION}"
-#    sed -i "/alias python=*/c\alias python=${PYTHONVERSION}" ~/.bash_aliases
-#  fi
-#else
-#  echo "alias python=${PYTHONVERSION}" >> ~/.bash_aliases
-#fi
-#
-#if grep -q "alias pip" ~/.bash_aliases
-#then
-#  sed -i "/alias pip=*/c\alias pip=pip3"
-#else
-#  echo -e "alias pip=pip3" >> ~/.bash_aliases
-#fi
-
-#source ~/.bashrc
-
-pip install netifaces coloredlogs sense_hat
+sudo -u pi pip install netifaces coloredlogs sense_hat
 
 cd /home/pi
 if [ -d SYSC3010 ]
@@ -72,16 +47,16 @@ cp showip.py ${SCRIPTFOLDER}/showip.py
 
 #check if showip is in crontab, and write to it if not.
 crontabcmd="@reboot [ ! -f ${SCRIPTFOLDER}/showip ] && python ${SCRIPTFOLDER}/showip.py &"
-crontab -l | grep -Fxq "${crontabcmd}" && echo "${crontabcmd} already exist" || (crontab -l ; echo ${crontabcmd}) | crontab -
+sudo -u pi crontab -l | grep -Fxq "${crontabcmd}" && echo "${crontabcmd} already exist" || (sudo -u pi crontab -l ; echo ${crontabcmd}) | sudo -u pi crontab -
 
 echo "cd ${sysc3010repofolder}
 git pull --rebase --quiet origin main
 " | sudo tee -a ${SCRIPTFOLDER}/pullgit.sh
-crontabtime="00 08 * * * pi "
-croncmd1="${crontabtime}bash ${SCRIPTFOLDER}/pullgit.sh"
+crontabtime="00 08 * * * pi"
+croncmd1="$crontabtime bash ${SCRIPTFOLDER}/pullgit.sh"
 croncmd2="@reboot bash ${SCRIPTFOLDER}/pullgit.sh"
-crontab -l | grep -Fxq "${croncmd1}" && echo "${croncmd1} already exist" || (crontab -l ; echo ${croncmd1}) | crontab -
-crontab -l | grep -Fxq "${croncmd2}" && echo "${croncmd2} already exist" || (crontab -l ; echo ${croncmd2}) | crontab -
+sudo -u pi crontab -l | grep -Fxq "$croncmd1" && echo "$croncmd1 already exist" || (sudo -u pi crontab -l ; echo "${croncmd1}") | sudo -u pi crontab -
+sudo -u pi crontab -l | grep -Fxq "$croncmd2" && echo "$croncmd2 already exist" || (sudo -u pi crontab -l ; echo "${croncmd2}") | sudo -u pi crontab -
 
 
 
