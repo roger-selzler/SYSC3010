@@ -20,7 +20,7 @@ _log.propagate = False
 coloredlogs.install(level='DEBUG',logger=_log)
 
 
-
+STARTUP_MESSAGE = "SYSC3010 - LAB1"
 interval_checkinterface = 1  # seconds
 
 defaultmessages = dict(nointernet="No internet access")
@@ -150,7 +150,7 @@ class ShowIP():
     def __init__(self):
         _log.debug("Initializing ShowIP class.")
         if SENSEHAT:
-            sh.show_message('SYSC3010 W22', text_colour=colors['red'])
+            sh.show_message(STARTUP_MESSAGE, text_colour=colors['red'])
         self._interfaces = IPV4interfaces()
 
 
