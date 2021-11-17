@@ -39,6 +39,8 @@ if [ -d SYSC3010 ]
 then
   echo "SYSC3010 already cloned."
   cd SYSC3010
+  git clean -df
+  git checkout -- .
   git pull --rebase --quiet origin main
 else
   git clone ${GITREPO}
