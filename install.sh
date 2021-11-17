@@ -44,6 +44,7 @@ fi
 sysc3010repofolder=$(pwd)
 
 cp showip.py ${SCRIPTFOLDER}/showip.py
+chmod 777 showip.sh
 
 #check if showip is in crontab, and write to it if not.
 crontabcmd="@reboot [ ! -f ${SCRIPTFOLDER}/showip ] && python ${SCRIPTFOLDER}/showip.py &"
