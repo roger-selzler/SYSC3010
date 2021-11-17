@@ -62,12 +62,12 @@ cp showip.py ${SCRIPTFOLDER}/showip.py
 
 crontabtime="00 08 * * * pi"
 croncmd1="$crontabtime sudo bash ${SCRIPTFOLDER}/pullgit.sh"
-croncmd2="@reboot sudo bash ${SCRIPTFOLDER}/pullgit.sh"
+croncmd2="@reboot sleep 30 && sudo bash ${SCRIPTFOLDER}/pullgit.sh"
 sudo -u pi crontab -l | grep -Fxq "$croncmd1" && echo "$croncmd1 already exist" || (sudo -u pi crontab -l ; echo "${croncmd1}") | sudo -u pi crontab -
 sudo -u pi crontab -l | grep -Fxq "$croncmd2" && echo "$croncmd2 already exist" || (sudo -u pi crontab -l ; echo "${croncmd2}") | sudo -u pi crontab -
 
 #check if showip is in crontab, and write to it if not.
-crontabcmd="@reboot [ ! -f ${SCRIPTFOLDER}/showip ] && python ${SCRIPTFOLDER}/showip.py &"
+crontabcmd="@reboot sleep 40 &&[ ! -f ${SCRIPTFOLDER}/showip ] && python ${SCRIPTFOLDER}/showip.py &"
 sudo -u pi crontab -l | grep -Fxq "${crontabcmd}" && echo "${crontabcmd} already exist" || (sudo -u pi crontab -l ; echo ${crontabcmd}) | sudo -u pi crontab -
 
 

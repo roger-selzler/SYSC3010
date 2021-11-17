@@ -16,6 +16,6 @@ then
    echo "SenseHat will show the ip from the interfaces on reboot"
 else
   touch ${showipfile}
-  #pkill -f -9 showip
+  #pkill -f -9 showip.py
   echo "SenseHat will not show the ip from the interfaces after reboot"
 fi
