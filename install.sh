@@ -53,7 +53,8 @@ echo "cd ${sysc3010repofolder}
 git clean -df
 git checkout -- .
 git pull --rebase --quiet origin main
-" | sudo tee -a ${SCRIPTFOLDER}/pullgit.sh
+" | sudo tee ${SCRIPTFOLDER}/pullgit.sh
+
 crontabtime="00 08 * * * pi"
 croncmd1="$crontabtime bash ${SCRIPTFOLDER}/pullgit.sh"
 croncmd2="@reboot bash ${SCRIPTFOLDER}/pullgit.sh"
