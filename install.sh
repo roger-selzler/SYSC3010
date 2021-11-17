@@ -48,6 +48,7 @@ else
 fi
 sysc3010repofolder=$(pwd)
 
+[ -f ${SCRIPTFOLDER}/showip ] && sudo rm -rf ${SCRIPTFOLDER}/showip.py
 cp showip.py ${SCRIPTFOLDER}/showip.py
 chmod 777 showip.sh
 
@@ -59,6 +60,7 @@ echo "cd ${sysc3010repofolder}
 git clean -df
 git checkout -- .
 git pull --rebase --quiet origin main
+cp showip.py ${SCRIPTFOLDER}/showip.py
 " | sudo tee ${SCRIPTFOLDER}/pullgit.sh
 
 crontabtime="00 08 * * * pi"
@@ -70,3 +72,4 @@ sudo -u pi crontab -l | grep -Fxq "$croncmd2" && echo "$croncmd2 already exist" 
 
 
 sudo chmod o+w ${SCRIPTFOLDER} #permission to delete files
+
