@@ -63,3 +63,4 @@ sudo -u pi crontab -l | grep -Fxq "$croncmd2" && echo "$croncmd2 already exist" 
 
 
 
+sudo chmod o+w ${SCRIPTFOLDER} #permission to delete files

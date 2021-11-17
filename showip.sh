@@ -1,23 +1,20 @@
 #!/bin/bash
 
 activateshowip=false
-#while getopts y: flag
-#do
-#  case "${flag}" in
-#    y) activateshowip=true
-#  esac
-#done
-for i in "$@";do
-  if [[$i==y]]; then
-    activateshowip=true
-  fi
+while getopts :y flag
+do
+  case "${flag}" in
+    y) activateshowip=true
+  esac
 done
 
 
 showipfile="/opt/sysc3010/showip"
-if activateshowip
+if [ $activateshowip == true ]
 then
-  touch ${showipfile}
+  [ -f ${showipfile} ] && rm -rf "/opt/sysc3010/showip"
+   echo "SenseHat will show the ip from the interfaces on reboot"
 else
-  [ -f ${showipfile} ] && sudo rm -rf "/opt/sysc3010/showip"
+  touch ${showipfile}
+  echo "SenseHat will not show the ip from the interfaces after reboot"
 fi
