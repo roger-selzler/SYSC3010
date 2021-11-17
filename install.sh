@@ -50,6 +50,8 @@ crontabcmd="@reboot [ ! -f ${SCRIPTFOLDER}/showip ] && python ${SCRIPTFOLDER}/sh
 sudo -u pi crontab -l | grep -Fxq "${crontabcmd}" && echo "${crontabcmd} already exist" || (sudo -u pi crontab -l ; echo ${crontabcmd}) | sudo -u pi crontab -
 
 echo "cd ${sysc3010repofolder}
+git clean -df
+git checkout -- .
 git pull --rebase --quiet origin main
 " | sudo tee -a ${SCRIPTFOLDER}/pullgit.sh
 crontabtime="00 08 * * * pi"
