@@ -9,6 +9,9 @@ SCRIPTFOLDER="/opt/sysc3010"
 GITREPO="https://github.com/roger-selzler/SYSC3010"
 DATE=$(date '+%Y%m%d-%H%M%S')
 echo $DATE
+[ ! -d ${LOGFOLDER} ] && mkdir ${LOGFOLDER}
+[ ! -d ${SCRIPTFOLDER} ] && mkdir ${SCRIPTFOLDER}
+
 LOGFILE="$LOGFOLDER/${DATE}_SYSC3010install.log"
 
 echo $LOGFILE
