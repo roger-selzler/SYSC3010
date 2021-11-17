@@ -150,7 +150,7 @@ class ShowIP():
     def __init__(self):
         _log.debug("Initializing ShowIP class.")
         if SENSEHAT:
-            sh.show_message('SYSC3010 W22', text_colour=colors['red'])
+            sh.show_message('SYSC3010', text_colour=colors['red'])
         self._interfaces = IPV4interfaces()
 
 
