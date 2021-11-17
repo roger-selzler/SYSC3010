@@ -57,8 +57,31 @@ apt-get -y install $PYTHONVERSION python3-pip
 pip install netifaces coloredlogs sense_hat
 
 cd /home/pi
-[ -d SYSC3010 ] && echo "SYSC3010 already cloned." || git clone ${GITREPO}
-cd SYSC3010/
+if [ -d SYSC3010 ]
+then
+  echo "SYSC3010 already cloned."
+  cd SYSC3010
+  git pull --rebase --quiet origin main
+else
+  git clone ${GITREPO}
+  cd SYSC3010
+fi
+sysc3010repofolder=$(pwd)
+
 cp showip.py ${SCRIPTFOLDER}/showip.py
+
+#check if showip is in crontab, and write to it if not.
+crontabcmd="@reboot [ ! -f ${SCRIPTFOLDER}/showip ] && python ${SCRIPTFOLDER}/showip.py &"
+crontab -l | grep -Fxq "${crontabcmd}" && echo "${crontabcmd} already exist" || (crontab -l ; echo ${crontabcmd}) | crontab -
+
+echo "cd ${sysc3010repofolder}
+git pull --rebase --quiet origin main
+" | sudo tee -a ${SCRIPTFOLDER}/pullgit.sh
+crontabtime="00 08 * * * pi "
+croncmd1="${crontabtime}bash ${SCRIPTFOLDER}/pullgit.sh"
+croncmd2="@reboot bash ${SCRIPTFOLDER}/pullgit.sh"
+crontab -l | grep -Fxq "${croncmd1}" && echo "${croncmd1} already exist" || (crontab -l ; echo ${croncmd1}) | crontab -
+crontab -l | grep -Fxq "${croncmd2}" && echo "${croncmd2} already exist" || (crontab -l ; echo ${croncmd2}) | crontab -
+
 
 
