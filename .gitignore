@@ -1,2 +1,4 @@
 venv*
 .idea*
+*_solution.py
+*Log.log

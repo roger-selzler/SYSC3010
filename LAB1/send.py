@@ -1,4 +1,4 @@
-from sysc3010utils import _log, sense
+from sysc3010utils import _log, sense, get_key
 
 
 import socket

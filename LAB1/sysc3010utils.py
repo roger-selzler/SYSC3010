@@ -1,7 +1,12 @@
 import logging
 import random
+import uuid
 _log = logging.getLogger('sysc3010')
-
+__fh = logging.FileHandler('lastLog.log','w')
+__fh.setLevel(logging.DEBUG)
+__formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+__fh.setFormatter(__formatter)
+_log.addHandler(__fh)
 try:
     import coloredlogs
     _log.propagate = False
@@ -54,5 +59,11 @@ colors = dict(red=[255, 0, 0],
               gray=[10, 10, 10],
               yellow=[255, 255, 0])
 
-
+def get_key():
+    correct_key = 'SYSC3010'
+    wrong_key = str(uuid.uuid4())
+    if random.random() > .7:
+        return wrong_key
+    else:
+        return correct_key
 
