@@ -75,7 +75,7 @@ class IPV4interfaces:
     def __init__(self):
         self._ipv4 = []
         self.getInterfaces()
-        # self.summary()
+        self.summary()
 
     def __contains__(self, item):
         for ipv4interface in self._ipv4:
