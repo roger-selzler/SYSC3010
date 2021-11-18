@@ -39,11 +39,11 @@ if [ -d SYSC3010 ]
 then
   echo "SYSC3010 already cloned."
   cd SYSC3010
-  git clean -df
-  git checkout -- .
-  git pull --rebase --quiet origin main
+  sudo -u pi git clean -df
+  sudo -u pi git checkout -- .
+  sudo -u pi git pull --rebase --quiet origin main
 else
-  git clone ${GITREPO}
+  sudo -u pi git clone ${GITREPO}
   cd SYSC3010
 fi
 sysc3010repofolder=$(pwd)
@@ -54,9 +54,9 @@ chmod 777 showip.sh
 
 
 echo "cd ${sysc3010repofolder}
-git clean -df
-git checkout -- .
-git pull --rebase --quiet origin main
+sudo -u pi git clean -df
+sudo -u pi git checkout -- .
+sudo -u pi git pull --rebase --quiet origin main
 cp showip.py ${SCRIPTFOLDER}/showip.py
 " | sudo tee ${SCRIPTFOLDER}/pullgit.sh
 
