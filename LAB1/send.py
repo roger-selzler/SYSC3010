@@ -1,11 +1,9 @@
 from sysc3010utils import _log, sense, get_key
-
-
 import socket
 import json
 import time
 
-UDP_IP = "192.168.0.28"
+UDP_IP = "192.168.0.1"
 UDP_PORT = 6874
 
 _log.debug("UDP target IP: %s" % UDP_IP)

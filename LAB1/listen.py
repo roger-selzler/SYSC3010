@@ -1,7 +1,5 @@
 from sysc3010utils import _log, sense
-import sys
 import socket
-import json
 
 _log.debug("Start listening.")
 

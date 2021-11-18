@@ -1,8 +1,16 @@
 import logging
 import random
 import uuid
+import sys
+
+if "send" in sys.argv[0]:
+    __logname = "sendLog.log"
+elif "listen" in sys.argv[0]:
+    __logname = "listenLog.log"
+else:
+    __logname = "lastLog.log"
 _log = logging.getLogger('sysc3010')
-__fh = logging.FileHandler('lastLog.log','w')
+__fh = logging.FileHandler(__logname,'w')
 __fh.setLevel(logging.DEBUG)
 __formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
 __fh.setFormatter(__formatter)
