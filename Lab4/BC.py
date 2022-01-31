@@ -1,4 +1,4 @@
-from B import *
+from Lab4.B import *
 
 def function_BC():
     print("BC")
